@@ -7,8 +7,8 @@ class LinkedList {
     this.tail = null;
   }
 
-  // `this` refers to the classes' instance's context
   append(value) {
+    //Adds a new node to the end of the linked list instance.
     const node = new Node(value);
     if (!this.head) {
       this.head = node;
@@ -20,6 +20,7 @@ class LinkedList {
   }
 
   prepend(value) {
+    //Adds a new node to the beginning of the linked list instance.
     const node = new Node(value);
     if (!this.head) {
       this.head = node;
@@ -31,6 +32,7 @@ class LinkedList {
   }
 
   size() {
+    //Returns the size of the linked list instance.
     if (!this.head || !this.tail) {
       return 0;
     }
@@ -46,7 +48,8 @@ class LinkedList {
     return count;
   }
 
-  at(index) {// not including the index
+  at(index) {
+    //Returns the node at the given index. Non inclusive index.
     if (index >= this.size()) {
       throw new Error("Index exceeds maximum linked list size");
     }
@@ -56,30 +59,35 @@ class LinkedList {
         currentNode = currentNode.nextNode;
       }
       return currentNode;
-    } else {
+    } else {//negative index inclusive
       let currentNode = this.head;
       index = index + this.size();
       if (index < 0) {
         throw new Error("Negative index exceeds maximum linked list size");
-      };
+      }
       for (let i = 0; i < index; i++) {
         currentNode = currentNode.nextNode;
       }
       return currentNode;
     }
   }
+
+  pop() {
+    //Removes the last element from the linked list instance.
+    if (!this.head || !this.tail) {
+      return undefined;
+    }
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+    }
+    let lastNode = structuredClone(this.at(-1))
+    let secondLastNode = this.at(-2)
+    secondLastNode.nextNode = null;
+    this.tail = secondLastNode;
+    return lastNode;
+  }
+
 }
 
 export default LinkedList;
-
-const linkedList = new LinkedList();
-
-linkedList.append("bog");
-linkedList.append("dog");
-linkedList.append("sog");
-linkedList.append("log");
-linkedList.append("nog");
-linkedList.append("rog");
-
-linkedList.prepend("rag");
-console.log(linkedList.at(-1));

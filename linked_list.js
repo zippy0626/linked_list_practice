@@ -34,18 +34,51 @@ class LinkedList {
     if (!this.head || !this.tail) {
       return 0;
     }
-    let count = 0;
+
     let currentNode = this.head;
 
+    let count = 0;
     while (currentNode !== null) {
-      currentNode = currentNode.nextNode
+      currentNode = currentNode.nextNode;
       count += 1;
     }
 
     return count;
   }
 
-
+  at(index) {// non inclusive//fix this shit is it including index or not including.
+    if (index >= this.size()) {
+      throw new Error("Index exceeds maximum linked list size");
+    }
+    if (index >= 0) {
+      let currentNode = this.head;
+      for (let i = 0; i < index; i++) {
+        currentNode = currentNode.nextNode;
+      }
+      return currentNode;
+    } else {
+      let currentNode = this.head;
+      index = index + this.size();
+      for (let i = 0; i < index; i++) {
+        currentNode = currentNode.nextNode;
+        //this already gives us the next node, no need
+        //to do inclusive for the index.
+      }
+      return currentNode;
+    }
+  }
 }
 
 export default LinkedList;
+
+const linkedList = new LinkedList();
+
+linkedList.append("bog");
+linkedList.append("dog");
+linkedList.append("sog");
+linkedList.append("log");
+linkedList.append("nog");
+linkedList.append("rog");
+
+linkedList.prepend("rag");
+console.log(linkedList.at());

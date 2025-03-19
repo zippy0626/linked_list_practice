@@ -46,7 +46,7 @@ class LinkedList {
     return count;
   }
 
-  at(index) {// non inclusive//fix this shit is it including index or not including.
+  at(index) {// not including the index
     if (index >= this.size()) {
       throw new Error("Index exceeds maximum linked list size");
     }
@@ -59,10 +59,11 @@ class LinkedList {
     } else {
       let currentNode = this.head;
       index = index + this.size();
+      if (index < 0) {
+        throw new Error("Negative index exceeds maximum linked list size");
+      };
       for (let i = 0; i < index; i++) {
         currentNode = currentNode.nextNode;
-        //this already gives us the next node, no need
-        //to do inclusive for the index.
       }
       return currentNode;
     }
@@ -81,4 +82,4 @@ linkedList.append("nog");
 linkedList.append("rog");
 
 linkedList.prepend("rag");
-console.log(linkedList.at());
+console.log(linkedList.at(-1));

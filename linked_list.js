@@ -59,7 +59,7 @@ class LinkedList {
         currentNode = currentNode.nextNode;
       }
       return currentNode;
-    } else {//negative index inclusive
+    } else {//negative index is inclusive
       let currentNode = this.head;
       index = index + this.size();
       if (index < 0) {
@@ -78,10 +78,12 @@ class LinkedList {
       return undefined;
     }
     if (this.head === this.tail) {
+      let lastNode = this.head;
       this.head = null;
       this.tail = null;
+      return lastNode;
     }
-    let lastNode = structuredClone(this.at(-1))
+    let lastNode = this.tail
     let secondLastNode = this.at(-2)
     secondLastNode.nextNode = null;
     this.tail = secondLastNode;

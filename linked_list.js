@@ -57,7 +57,8 @@ class LinkedList {
         currentNode = currentNode.nextNode;
       }
       return currentNode;
-    } else {//negative index is inclusive
+    } else {
+      //negative index is inclusive
       let currentNode = this.head;
       index = index + this.size();
       if (index < 0) {
@@ -81,8 +82,8 @@ class LinkedList {
       this.tail = null;
       return lastNode;
     }
-    let lastNode = this.tail
-    let secondLastNode = this.at(-2)
+    let lastNode = this.tail;
+    let secondLastNode = this.at(-2);
     secondLastNode.nextNode = null;
     this.tail = secondLastNode;
     return lastNode;
@@ -91,16 +92,46 @@ class LinkedList {
   contains(value) {
     //Returns true if the passed value is in the linked list, otherwise returns false.
     if (!this.head) return false;
-    let currentNode = this.head
+    let currentNode = this.head;
     while (currentNode) {
       if (currentNode.value === value) {
         return true;
       }
-      currentNode = currentNode.nextNode
+      currentNode = currentNode.nextNode;
     }
     return false;
   }
 
+  find(value) {
+    //Returns the index of the node containing value, or null if not found.
+    if (!this.head) return null;
+    let currentNode = this.head;
+    let index = 0;
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return index;
+      } else {
+        index += 1;
+        currentNode = currentNode.nextNode;
+      }
+    }
+    return null;
+  }
+
+  toString() {
+    // Represents your LinkedList objects as strings,
+    // so you can print them out and preview them in the console.
+    // The format should be: ( value ) -> ( value ) -> ( value ) -> null
+    if (!this.head) return "null";
+    let currentNode = this.head;
+    let result = [];
+    while (currentNode) {
+      result.push(`(${currentNode.value})`);
+      currentNode = currentNode.nextNode;
+    }
+
+    return result.join(" => ") + " => null";
+  }
 }
 
 export default LinkedList;

@@ -33,7 +33,7 @@ class LinkedList {
 
   size() {
     //Returns the size of the linked list instance.
-    if (!this.head || !this.tail) return 0;
+    if (!this.head) return 0;
     if (this.head === this.tail) return 1;
 
     let currentNode = this.head;
@@ -72,7 +72,7 @@ class LinkedList {
 
   pop() {
     //Removes the last element from the linked list instance.
-    if (!this.head || !this.tail) {
+    if (!this.head) {
       return undefined;
     }
     if (this.head === this.tail) {
@@ -90,15 +90,13 @@ class LinkedList {
 
   contains(value) {
     //Returns true if the passed value is in the linked list, otherwise returns false.
-    if (!this.head || !this.tail) return false;
+    if (!this.head) return false;
     let currentNode = this.head
-    for (let i = 0; i < this.size(); i++) {
-      let currentNodeValue = currentNode.value
-      if (currentNodeValue === value) {
+    while (currentNode) {
+      if (currentNode.value === value) {
         return true;
-      } else {
-        currentNode = currentNode.nextNode;
       }
+      currentNode = currentNode.nextNode
     }
     return false;
   }

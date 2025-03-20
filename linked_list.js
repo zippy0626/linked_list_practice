@@ -33,16 +33,14 @@ class LinkedList {
 
   size() {
     //Returns the size of the linked list instance.
-    if (!this.head || !this.tail) {
-      return 0;
-    }
+    if (!this.head || !this.tail) return 0;
+    if (this.head === this.tail) return 1;
 
     let currentNode = this.head;
-
     let count = 0;
-    while (currentNode !== null) {
-      currentNode = currentNode.nextNode;
+    while (currentNode) {
       count += 1;
+      currentNode = currentNode.nextNode;
     }
 
     return count;
@@ -88,6 +86,21 @@ class LinkedList {
     secondLastNode.nextNode = null;
     this.tail = secondLastNode;
     return lastNode;
+  }
+
+  contains(value) {
+    //Returns true if the passed value is in the linked list, otherwise returns false.
+    if (!this.head || !this.tail) return false;
+    let currentNode = this.head
+    for (let i = 0; i < this.size(); i++) {
+      let currentNodeValue = currentNode.value
+      if (currentNodeValue === value) {
+        return true;
+      } else {
+        currentNode = currentNode.nextNode;
+      }
+    }
+    return false;
   }
 
 }

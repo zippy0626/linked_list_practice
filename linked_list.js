@@ -48,29 +48,35 @@ class LinkedList {
 
   at(index) {
     //Returns the node at the given index. Non inclusive index.
-    let size = this.size();
+    //Zero based index
     if (!this.head) return null;
+
+    let size = this.size();
     if (index >= size) {
-      throw new Error("Index exceeds maximum linked list size");
+      throw new Error("Index exceeds maximum list size");
     }
+
+    let currentNode = this.head;
+
     if (index >= 0) {
-      let currentNode = this.head;
+      if (index > size) {
+        throw new Error("Index exceeds maximum list size");
+      }
       for (let i = 0; i < index; i++) {
         currentNode = currentNode.nextNode;
       }
-      return currentNode;
     } else {
-      //negative index is inclusive
-      let currentNode = this.head;
-      index = index + size;
+      //negative is inclusive
+      index += size;
       if (index < 0) {
-        throw new Error("Negative index exceeds maximum linked list size");
+        throw new Error("Index exceeds maximum list size");
       }
       for (let i = 0; i < index; i++) {
         currentNode = currentNode.nextNode;
       }
-      return currentNode;
     }
+
+    return currentNode;
   }
 
   pop() {

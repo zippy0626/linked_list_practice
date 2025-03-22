@@ -48,10 +48,11 @@ class LinkedList {
 
   at(index) {
     //Returns the node at the given index. Non inclusive index.
-    //Zero based index
+    //Returns head if no index provided.
+    //Is a zero based index.
     if (!this.head) return null;
-
     let size = this.size();
+
     if (index >= size) {
       throw new Error("Index exceeds maximum list size");
     }

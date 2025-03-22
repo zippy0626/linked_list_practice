@@ -8,7 +8,7 @@ class LinkedList {
   }
 
   append(value) {
-    //Adds a new node to the end of the linked list instance.
+    // Adds a new node to the end of the linked list instance.
     const node = new Node(value);
     if (!this.head) {
       this.head = node;
@@ -20,7 +20,7 @@ class LinkedList {
   }
 
   prepend(value) {
-    //Adds a new node to the beginning of the linked list instance.
+    // Adds a new node to the beginning of the linked list instance.
     const node = new Node(value);
     if (!this.head) {
       this.head = node;
@@ -32,7 +32,7 @@ class LinkedList {
   }
 
   size() {
-    //Returns the size of the linked list instance.
+    // Returns the size of the linked list instance.
     if (!this.head) return 0;
     if (this.head === this.tail) return 1;
 
@@ -47,9 +47,9 @@ class LinkedList {
   }
 
   at(index) {
-    //Returns the node at the given index. Non inclusive index.
-    //Returns head if no index provided.
-    //Is a zero based index.
+    // Returns the node at the given index. Non inclusive index.
+    // Returns head if no index provided.
+    // Is a zero based index.
     if (!this.head) return null;
     let size = this.size();
 
@@ -67,7 +67,7 @@ class LinkedList {
         currentNode = currentNode.nextNode;
       }
     } else {
-      //negative is inclusive
+      // negative is inclusive
       index += size;
       if (index < 0) {
         throw new Error("Index exceeds maximum list size");
@@ -81,7 +81,7 @@ class LinkedList {
   }
 
   pop() {
-    //Removes the last element from the linked list instance.
+    // Removes the last element from the linked list instance.
     if (!this.head) {
       return undefined;
     }
@@ -99,7 +99,7 @@ class LinkedList {
   }
 
   contains(value) {
-    //Returns true if the passed value is in the linked list, otherwise returns false.
+    // Returns true if the passed value is in the linked list, otherwise returns false.
     if (!this.head) return false;
     let currentNode = this.head;
     while (currentNode) {
@@ -112,7 +112,7 @@ class LinkedList {
   }
 
   find(value) {
-    //Returns the index of the node containing value, or null if not found.
+    // Returns the index of the node containing value, or null if not found.
     if (!this.head) return null;
     let currentNode = this.head;
     let index = 0;
@@ -140,6 +140,31 @@ class LinkedList {
     }
 
     return result.join(" => ") + " => null";
+  }
+
+  insertAt(index, value) {
+    // Inserts a new node with the provided value at the given index.
+    // Value replaces at the given index's value.
+    if (index === undefined) {
+      throw new Error("Missing insert index");
+    }
+    // Convert index to positive at start
+    let size = this.size();
+    if (index < 0) index += size;
+    if (index > size) {
+      throw new Error("Index exceeds maximum list size");
+    }
+    if (index === 0) {
+      this.prepend(value);
+    } else if (index === size) {
+      this.append(value);
+    } else {
+      const node = new Node(value);
+      let previousNode = this.at(index - 1);
+      let currentNode = this.at(index);
+      node.nextNode = currentNode;
+      previousNode.nextNode = node;
+    }
   }
 }
 
